@@ -10,6 +10,11 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.set("view engine", "ejs");
+
+app.use(express.static("public")); // Create a 'public' folder for static files like stylesheets
+
 // Connection and Setting up environment
 const port = normalizePort(process.env.PORT || "3000");
 const server = http.createServer(app);
@@ -20,7 +25,7 @@ server.on("listening", onListening);
 connectDb();
 
 app.get("/", (req, res) => {
-  res.send("Hello");
+  res.render("index.ejs");
 });
 
 app.use("/login", login);
