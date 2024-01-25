@@ -50,7 +50,7 @@ test.post("/", async (req, res) => {
   try {
     let user = await User.findOne({ _id: _id, token: token });
 
-    if (!user) {
+    if (!user || !user.admin) {
       return res.status(404).json({ error: "Auth Failed" });
     }
 

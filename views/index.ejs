@@ -3,32 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="google-signin-client_id"
-      content="481624698418-jda90rkmm7024fjccari5crae1dicdtn.apps.googleusercontent.com"
-    />
+
     <title>Admin Page</title>
   </head>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <body>
     <h1>Welcome to the Admin Page</h1>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <!-- Add form for adding tests/questions here -->
-    <a href="#" onclick="signOut();">Sign out</a>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <div
+      id="g_id_onload"
+      data-client_id="481624698418-jda90rkmm7024fjccari5crae1dicdtn.apps.googleusercontent.com"
+      data-context="use"
+      data-ux_mode="popup"
+      data-login_uri="login"
+      data-nonce=""
+      data-auto_select="true"
+      data-itp_support="true"
+    ></div>
+
+    <div
+      class="g_id_signin"
+      data-type="standard"
+      data-shape="pill"
+      data-theme="filled_blue"
+      data-text="continue_with"
+      data-size="large"
+      data-logo_alignment="left"
+    ></div>
   </body>
   <script>
-    function onSignIn(googleUser) {
-      var profile = googleUser.getBasicProfile();
-      console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log("Name: " + profile.getName());
-      console.log("Image URL: " + profile.getImageUrl());
-      console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
-    }
-    function signOut() {
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        console.log("User signed out.");
-      });
+    function getCookie(cookieName) {
+      const cookies = document.cookie.split(";");
+
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith(cookieName + "=")) {
+          return cookie.substring(cookieName.length + 1);
+        }
+      }
+
+      return null;
     }
   </script>
 </html>

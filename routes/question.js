@@ -45,7 +45,7 @@ question.post("/", async (req, res) => {
   try {
     let user = await User.findOne({ _id: _id, token: token });
 
-    if (!user) {
+    if (!user || !user.admin) {
       return res.status(404).json(new ErrorRes("Authentication Failure"));
     }
     const test = await Test.findById(test_id);
